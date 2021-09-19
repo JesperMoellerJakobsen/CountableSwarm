@@ -1,0 +1,23 @@
+version: "3.9"
+services:
+    countableresourceservice:
+        image: "jespermjakobsen/counterservice:countableresourceservice"
+        environment:
+            - ASPNETCORE_ENVIRONMENT=Development
+        ports:
+            - "5001:80"
+        depends_on:
+            - db
+    countablebusinesslogicservice:
+        image: "jespermjakobsen/counterservice:businesslogicservice"
+        environment:
+            - ASPNETCORE_ENVIRONMENT=Development
+        ports:
+            - "5000:80"
+    db:
+        image: "mcr.microsoft.com/mssql/server:2017-CU8-ubuntu"
+        environment:
+            SA_PASSWORD: ""
+            ACCEPT_EULA: "Y"
+        ports:
+            - "1433:1433"
